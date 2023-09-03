@@ -7,6 +7,8 @@ $$
 \text{Population} \xleftharpoondown[estimate]{\xrightharpoonup{sampling}} \text{Sample}
 $$
 
+
+
 ![001](./Figures/001/001.png)
 
 | Statistic (统计量)             | Population (总体) - $N$ 个 | Sample (样本) - $n$ 个 |
@@ -408,7 +410,7 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
    > *e.g.*, Consider a sample space $\Omega = \{e_1, e_2, e_3\}$, there is a random variable $X=X(e)$ to map every sample point to a unique real number $x$. For example,  $X(e_1) = x_1$.
    >
-   > ![007](./Figures/001/007.png)
+   > <img src="./Figures/001/007.png" alt="007" style="zoom:80%;" />
 
    `Probability Space`: A probability space is composed by a triad $(\Omega, \mathcal{F}, P)$, where $A \in \mathcal{F}$ is a random event, $\mathcal{F}$ is the set of all possible $A$, $P(A)$ is the probability of $A$ occurring.
 
@@ -435,9 +437,9 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
    `Distribution Family`: Different combinations of parameter space.
 
-   > *e.g.*, Let one normal distribution has 2 parameters: $N(\mu,\sigma^2)$.
+   > *e.g.*, Let one normal distribution has 2 parameters: $N\left(\mu,\sigma^2\right)$.
    >
-   > **Parameter Combination**: $(\mu,\sigma^2)$
+   > **Parameter Combination**: $\left(\mu,\sigma^2\right)$
    >
    > **Parameter Space**: $\mu = \{0, 1, 2\}$
    >
@@ -451,24 +453,24 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
 3. **Discrete Random Variable (离散型随机变量)**
 
-   The values that RV. $X$ can take is *finite* or *infinitely many* (有限个或可列无穷多个). 
+   The values that RV.$X$ can take is *finite* or *infinitely many* (有限个或可列无穷多个). 
    $$
    P\{X=x_k\}=p_k, \quad k=1,2,\cdots\tag{1.13}\label{1.13}
    $$
-   All of the $p_k$ consist the `Probility Mass Function` (PMF, 概率质量函数) of RV. $X$.
+   All of the $p_k$ consist the `Probility Mass Function` (PMF, 概率质量函数) of RV.$X$.
    > The value of each point of PMF is meaningful, $\text{PMF}(X=x_k)=p_k$
    >
    > <img src="./Figures/001/008.png" alt="008" style="zoom:33%;" />
 
 4. **Continuous Random Variable (连续型随机变量)**
 
-   For non-negtive function $f(x),x\in\mathbb{R}$, if
+   For non-negtive function $f(x),x\in\mathbb{R}$, if `CDF`
    $$
    F_X(x) = P\{X \leqslant x\} = \int_{-\infty}^{x} f(t)\, {\rm d}t
    \tag{1.14}\label{1.14}
    $$
 
-   then $X$ is continuous random variable, $f(x)$ is the `Probability Density Function` (PDF, 概率密度函数) of RV. $X$.
+   then $X$ is continuous random variable, $f(x)$ is the `Probability Density Function` (PDF, 概率密度函数) of RV.$X$.
 
    > The value of each point of PDF is meaningless, $\text{PDF}(X=x_k)=0$
    >
@@ -476,10 +478,16 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
 5. **Probability Distribution Function (Culmulative Distribution Function, CDF, 累积分布函数)**
    $$
-   F_X(x) = P\{X \leqslant x\},x\in\mathbb{R}\tag{1.15}\label{1.15}
+   F_X(x_k) = P\{X \leqslant x_k\} = 
+   \left\{ \begin{aligned}
+   & \sum_{i=1}^k{P\{X=x_i\}} = \sum_{i=1}^kp_k \quad, X \text{ is discrete} \\\\
+   & \int_{-\infty}^{x_k} f(x)\, {\rm d}x \quad\quad\quad\quad\quad\quad, X \text{ is continuous}
+   \end{aligned} \right.
+   \quad,\ x_k\in\mathbb{R}
+   \tag{1.15}\label{1.15}
    $$
    
-
+   
    > The derivative of CDF is PDF, the integral of PDF is CDF.
    > $$
    > \frac{dF(x)}{dx}=f(x) \iff \int_{-\infty}^{+\infty} f(x)\, {\rm d}x = F(x)
@@ -490,7 +498,7 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
    $\mathbb{E}(·)$ can be considered as a kind of `Weighted Average`.
 
-   Let the <font color="orange">PMF</font> / <font color="blueviolet">PDF</font> of <font color="orange">discrete</font> / <font color="blueviolet">continuous</font> RV. $X$ be ${\color{orange}  P(X=x_i)=p_i, \ i=1,2,\cdots}$ / ${\color{blueviolet} f(x)}$; if
+   Let the <font color="orange">PMF</font> / <font color="blueviolet">PDF</font> of <font color="orange">discrete</font> / <font color="blueviolet">continuous</font> RV.$X$ be ${\color{orange}  P(X=x_i)=p_i, \ i=1,2,\cdots}$ / ${\color{blueviolet} f(x)}$; if
    <font color="orange">the series</font>  ${\color{orange} \sum_{i} \left\vert x_i \right\vert p_i}$ / <font color="blueviolet">the integral</font> ${\color{blueviolet} \int_{-\infin}^{+\infin} \left\vert x \right\vert f(x)\, {\rm d} x}$ is convergence, then its mathematic expectation
    $$
    \begin{aligned}
@@ -502,7 +510,7 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
 7. **Moment (矩，可理解为一种距离)**
 
-   Let RV. $X \sim F(x)$, for $\forall k \in \mathbb{Z}^+$, if $\mathbb{E}(\left\vert X \right\vert)$ exists, then `The kth Order Origin Moment` of $X$ is
+   Let RV.$X \sim F(x)$, for $\forall k \in \mathbb{Z}^+$, if $\mathbb{E}(\left\vert X \right\vert)$ exists, then `The kth Order Origin Moment` of $X$ is
    $$
    \alpha_k = \mathbb{E}(X^k) = \int_{-\infin}^{+\infin} x^k\, {\rm d}F(x)
    \tag{1.17}\label{1.17}
@@ -524,9 +532,9 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
 1. **Binomial Distribution (二项分布)**
 
-   Comes from *Bernoulli Experiment*. **The binomial distribution $B(n,p)$ means that in an *$n$-fold Bernoulli Experiment (n 重伯努利试验)*, $p$ is the probability of the event $A$ happens exactly $k$ times.**
+   Comes from *Bernoulli Experiment*. **The binomial distribution $\mathcal{B}(n,p)$ means that in an *$n$-fold Bernoulli Experiment (n 重伯努利试验)*, $p$ is the probability of the event $A$ happens exactly $k$ times.**
    `n-fold Bernoulli Experiment`: The *$n$ independent repeated expriment ($n$ 次独立重复实验)* which means **repeat the Bernoulli Experiment $n$ times** in the same condition, and the result of each experiment is not influenced by others.
-   
+
    The `Distribution Law` and `CDF ` of Binomial Distribution is as follow:
    $$
    \begin{aligned}
@@ -536,12 +544,12 @@ st.f.rvs(size=, dfn=2, dfd=9)
    	& F(x) = \sum_{k=0}^{\lfloor x \rfloor} C_n^k p^k (1-p)^{n-k} = P\{X \leqslant x\}
    	\end{aligned}
    \right.\\\\
-   &\Rightarrow X \sim B(n,p)
+   &\Rightarrow X \sim \mathcal{B}(n,p)
    \end{aligned}
    \tag{1.19}\label{1.19}
    $$
    where:
-   
+
    | Symbol  | Meaning                                                      |
    | :-----: | :----------------------------------------------------------- |
    |   $n$   | The total experiment times                                   |
@@ -550,7 +558,7 @@ st.f.rvs(size=, dfn=2, dfd=9)
    | $C_n^k$ | The number of combinations event $A$ occurs exactly $k$ times in $n$ experiments |
    |   $p$   | The probability event $A$ occurs exactly                     |
    |  $1-p$  | The probability event $A$ does not occur                     |
-   
+
    > *e.g.*, There are 90 independent same devices, their failure rate = 0.01, and one person can only cope the failure of one device. There are 2 ways to distribute the maintenance workers:
    > 		(1) Each worker responsible for 30 devices, the 3 workers maintain separately;
    > 		(2) All 3 workers responsible for 90 devices jointly. 
@@ -562,11 +570,11 @@ st.f.rvs(size=, dfn=2, dfd=9)
    >
    > There are 2 situations of the devices: *Normal* or *Failure*, so it can be solved by Binomial Distribution. *Probability of simultaneous failure of more than $x_0$ devices is $P\{X > x_0\}$.*
    >
-   > ​	For way (1), “can repair devices in time” means *there cannot be more than 2 devices getting failure at the same time in 30 devices*. Because these 30 devices are only responsible by one person who can only handle one failure device at the same time.
-   > ​	For way (2), “can repair devices in time” means *there cannot be more than 4 devices getting failure at the same time in 90 devices*. Because these 90 devices are responsible by 3 person who can handle 3 failure device at the same time.
+   > ​	For way (1), “can repair devices in time” means *there cannot be more than 2 devices getting failure at the same time in 30 devices*. Because these 30 devices are only responsible by one person who can only handle one failure device at the same time. That is $X \sim \mathcal{B}(30, 0.01)$
+   > ​	For way (2), “can repair devices in time” means *there cannot be more than 4 devices getting failure at the same time in 90 devices*. Because these 90 devices are responsible by 3 person who can handle 3 failure device at the same time. That is $X \sim \mathcal{B}(90, 0.01)$
    >
    > To sum up, in way (1), $x_0 = 1,\ P=\{X>1\}$; in way (2), $x_0 = 3,\ P=\{X>3\}$. This can be solved by python as follow. **Thus we can conclude that when all 3 workers responsible for 90 devices jointly, the probability that workers cannot repair the failure devices in time is less. **
-   
+
    ```python
    # 生存函数 (Survival Function)
    # SF:  P{X > x_0}
@@ -580,10 +588,11 @@ st.f.rvs(size=, dfn=2, dfd=9)
    1 - st.binom.cdf(k=1, p=0.01, n=30) * 3
    1 - st.binom.cdf(k=3, p=0.01, n=90)
    ```
+
    
-   
+
    ==**Arrangement (Permutation) and Combination (排列组合)**==
-   
+
    `Arrangement`: The number of sampling methods about sample $m$ times **in sequence** from $n$ things. (从 $n$ 开始乘 $m$ 个数)
    $$
    A_n^m = \frac{n!}{(n-m)!} = \overbrace{n\times(n-1)\times\cdots}^{m}, \quad m \leqslant n
@@ -594,7 +603,7 @@ st.f.rvs(size=, dfn=2, dfd=9)
    C_n^m = \frac{n!}{m! \times (n-m)!} = \frac{\overbrace{n\times(n-1)\times\cdots}^{m}}{m}, \quad m \leqslant n
    \tag{1.21}\label{1.21}
    $$
-   
+
    > *e.g.*, Consider there are $n=3$ things need to be sampled $m=2$ times, so that
    > $$
    > \begin{aligned}
@@ -624,41 +633,328 @@ st.f.rvs(size=, dfn=2, dfd=9)
    where $\mu(X) = \sigma^2(X) = \lambda$.
    
    > *e.g.*, Let the probability of a scar on a 1-foot wire be $\frac{1}{1000}$, and consider the reality, let the probability of 2 or more scars on a 1-foot wire be 0.
-   >     Find the probability of 5 or more scars on 3000-foot wire.
+   >  Find the probability of 5 or more scars on 3000-foot wire.
    >
    > 
    >
    > **Solution.**
    >
-   > 
+   > Let RV.$X$ be the number of scars on a 3000-foot wire. If we assume that the numbers of scars on non-overlapping intervals are independent, then this assumption is approaching to the `Poisson Process` (Poisson process is a kind of `Stochastic Process`, no expansion here), where $\lambda=\frac{1}{1000},\omega=3000$.
+   >
+   > Thus, $X$ roughlt follows a poisson distribution with mean $\mu=3000\times\frac{1}{1000}=3=\lambda_{\text{in poisson distribution}}$. So the probobility of 5 or more scars on a 3000-foot wire is
+   > $$
+   > P\{X \geqslant 5 \} = \sum_{k=5}^{+\infin} \frac{3^k e^{-3}}{k!}
+   > $$
+   > where $P\{X \geqslant 5\}$ can be represented by $\left(1-P\{X \leqslant 4\}\right)$. The solving with python is as follow. **Thus we can conclude that the probability of 5 or more scars on a 3000-foot wire is 0.185.**
+   
+   ```python
+   # 0.185
+   1 - st.poisson.cdf(k=4, mu=3)
+   st.poisson.sf(k=4, mu=3)  # here k is 4 rather 5, because SF is P{X>x_0}
+   ```
+   
 
 #### 1.2.3. Continuous Probability Distribution · 连续型概率分布
 
 1. **Normal Distribution (正态分布)**
 
-   asd
+   Aka **Gaussian Distribution**. About 95% of the data is in $[\mu-2\sigma,\mu+2\sigma]$.
+   $$
+   \begin{aligned}
+   &\left\{
+   	\begin{aligned}
+   	& f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \\
+   	& F(x) = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infin}^{x} e^{-\frac{(t-\mu)^2}{2\sigma^2}}\, {\rm d}t = P\{X \leqslant x\}
+   	\end{aligned}
+   \right.\\\\
+   &\Rightarrow X \sim \mathcal{N}\left(\mu,\sigma^2\right)
+   \end{aligned}
+   \tag{1.23}\label{1.23}
+   $$
+   > *e.g.1*, PDF of $X \sim N\left(\mu=1, \sigma^2=0.25\right)$.
+   >
+   > <img src="./Figures/001/012.png" alt="012" style="zoom: 80%;" />
 
-2. **t-distribution (Student’s t distribution, t 分布)**
+   ```python
+   # Most distributions have the following functions
+   st.norm.cdf(<x_0>, <mean>, <SD>)
+   st.norm.sf(<x_0>, <mean>, <SD>)  # SF + CDF = 1
+   st.norm.pdf(<RV.X>, <mean>, <SD>)
+   st.norm.rvs(<mean>, <SD>, <numbers of RV. = n>)  # Generate n RVs.
+   st.norm.ppf(<percentile>, <mean>, <SD>)  # Lower quantile
+   st.norm.interval(<confidence level = 1-alpha>, <mean>, <SD>)  # See C3 for details
+   ```
+   | Distributions                  | Corresponding Name in `scipy` |
+   | ------------------------------ | ----------------------------- |
+   | Beta Distribution              | `beta`                        |
+   | Binomial Distribution          | `binom`                       |
+   | Cauchy Distribution            | `cauchy`                      |
+   | Chi-Squared Distribution       | `chi2`                        |
+   | Exponential Distribution       | `expon`                       |
+   | F Distribution                 | `f`                           |
+   | Gamma Distribution             | `gamma`                       |
+   | Geometric Distribution         | `geom`                        |
+   | Hypergeometric Distribution    | `hypergeom`                   |
+   | Log-Normal Distribution        | `lognorm`                     |
+   | Logistic Distribution          | `logistic`                    |
+   | Negative Binomial Distribution | `nbinom`                      |
+   | Normal Distribution            | `norm`                        |
+   | Poisson Distribution           | `poisson`                     |
+   | Student’s t Distribution       | `t`                           |
+   | Uniform Distribution           | `uniform`                     |
+   | Weibull Distribution           | `exponweib`                   |
+   | Wilcoxon Distribution          | `wilcoxon`                    |
+   
+   >*e.g.2*, PPF 
+   
+   > *e.g.3*, Normal distribution under different paramenters
+   >
+   > <img src="./Figures/001/014.png" alt="014" style="zoom:80%;" />
+   >
+   > ```python
+   > plt.figure(figsize=(8, 6))
+   > 
+   > #            (<start>, <end>, <interval>)
+   > # Generate [(<end> - <start>) / <interval>] data
+   > x = np.arange(-10., 10., 0.01)
+   > 
+   > y = st.norm.pdf(x, 1.0, 0.5)  # mean = 1.0, SD = 0.5
+   > # annotate(): Set the arrow and text points to the PDF
+   > plt.annotate(
+   >     "mu=1, sigma=0.5",
+   >     xy=(1.0, st.norm.pdf(1.0, 1.0, 0.5)),  # Coordinates of the location pointed to (PDF)
+   >     xytext=(0.3, st.norm.pdf(1.0, 1.0, 0.5) + 0.2),  # Coordinates of the location pointed from (text)
+   >     weight="bold",
+   >     color='steelblue',
+   >     fontsize=14,
+   >     arrowprops=dict(arrowstyle="->",
+   >                     connectionstyle="arc3",
+   >                     color="steelblue")
+   > )
+   > ...
+   > plt.plot(x,y)
+   > ...
+   > plt.title("正态分布概率密度函数", size=14)
+   > plt.xlabel("随机变量", size=14)
+   > plt.ylabel("正态分布概率密度", size=14)
+   > plt.ylim(-0.02, 1.1)  # Range of y-axis
+   > plt.show()
+   > ```
+   >
+   > 
+   
+2. **Gamma Distribution (伽马分布)**
 
-   asd
+   The `Gamma Function` $\Gamma(a)=\int_{0}^{+\infin} x^{a-1}e^{-x}\, {\rm d}x,(a>0)$, and the PDF of *gamma distribution* is
+   $$
+   f(x,a)=\frac{x^{a-1}e^{-x}}{\Gamma(a)}
+   \tag{1.24}\label{1.24}
+   $$
 
-3. **Gamma Distribution (伽马分布)**
+   ```python
+   import scipy.special as ss
+   # Gamma Function
+   ss.gamma(a)
+   ```
 
-   asd
+   ==TO BE COMPLEMENTED==
+   
+3. **t-distribution (Student’s t distribution, t 分布)**
+
+   Let 
+   $$
+   \begin{aligned}
+   &\text{RV.}\begin{cases}
+   	W \sim N(0,1)	   	&,\text{Standard Normal Distribution}\\
+   	V \sim \chi^2(n) 	&,\text{Chi-Squared Distribution with $df=n$}
+   \end{cases}
+   \\
+   &\text{p.s. The RVs. of Chi-Squared Distribution fits $N(0,1)$}
+   \end{aligned} \quad\quad,
+   $$
+   then RV.$X=\frac{W}{\sqrt{\frac{V}{n}}}$ fits the *t-distribution* with $df=n$.
+   $$
+   \begin{aligned}
+   &\left\{
+   	\begin{aligned}
+           & f(x) = \frac{\Gamma\left(\frac{n+1}{2}\right)}{\sqrt{n\pi}\ \ \Gamma\left(\frac{n}{2}\right)} \left(1 + \frac{x^2}{n}\right)^{-\frac{n+1}{2}} \\\\
+   	& P\{X \leqslant x \} = \int_{-\infin}^{x}f(t)\, {\rm d}t
+   	\end{aligned}
+   \right. \\\\
+   &\Rightarrow X \sim t(n)
+   \end{aligned}
+   
+   \tag{1.25}\label{1.25}
+   $$
+   where the `Gamma Function` $\Gamma(x)=\int_{0}^{+\infin} t^{x-1}e^{-t}\, {\rm d}t,(x>0)$.
+   > *e.g.*, PDF of $X \sim t(2)$
+   >
+   > <img src="./Figures/001/015.png" alt="014" style="zoom:70%;" />
 
 4. **Chi-Square Distribution (卡方分布)**
 
-   asd
+   Let $n$ independent RVs.$\xi_1,\xi_2,\cdots,\xi_n \sim N(0,1)$, then their sum of squares $Q=\sum_{i=1}^{n} \xi_i^2$ form a new set of RV.$X \sim \chi^2(n)$.
+   $$
+   \begin{aligned}
+   &\left\{
+   	\begin{aligned}
+           & f(x)=
+           \left\{
+               \begin{aligned}
+               	&\frac{1}{\Gamma(\frac{n}{2}) \cdot 2^{\frac{n}{2}}}x^{\frac{n}{2}-1}e^{-\frac{x}{2}} &, 0 < x < +\infin\\
+   	&0 &, -\infin < x \leqslant 0
+   	\end{aligned}
+   \right.\\\\
+   	& P\{X \leqslant x \} = \int_{0}^{x}f(t)\, {\rm d}t
+   	\end{aligned}
+   \right. \\\\
+   
+   &\Rightarrow X \sim \chi^2(n)
+   \end{aligned}
+   
+   
+   \tag{1.26}\label{1.26}
+   $$
+   > *e.g.*, Chi-Squared distribution under different paramenters
+   >
+   > <img src="./Figures/001/016.png" alt="016" style="zoom:80%;" />
+   >
+   > ```python
+   > plt.figure(figsize=(8, 6))
+   > 
+   > x = np.arange(0., 14., 0.01)
+   > 
+   > y = st.chi2.pdf(x, 1)  # df = 1
+   > plt.annotate(
+   >     "degree=1",
+   >     xy=(3, st.chi2.pdf(3, 1)),
+   >     xytext=(0.7, st.chi2.pdf(3, 1)-0.04),
+   >     weight="bold",
+   >     color='steelblue',
+   >     fontsize=14,
+   >     arrowprops=dict(arrowstyle="->",
+   >                     connectionstyle="arc3",
+   >                     color="steelblue")
+   > )
+   > ...
+   > plt.plot(x,y)
+   > ...
+   > plt.title("卡方分布概率密度函数", size=14)
+   > plt.xlabel("随机变量", size=14)
+   > plt.ylabel("卡方分布概率密度", size=14)
+   > plt.ylim(0., 0.4)
+   > plt.show()
+   > ```
+   >
+   > 
 
-5. **F-distribution (F 分布)**
+   When $df=n \rightarrow +\infin$, $\chi^2(n) \sim \mathcal{N}\left(\mu, \sigma^2\right)$. (*This is disputed, but the graph of $\chi^2(+\infin)$ is indeed a bell curve as follow.*)
 
-   asd
+   <img src="./Figures/001/017.png" alt="017" style="zoom:50%;" />
+
+5. **F-distribution (F 分布)** (Right Skewed 右偏态，重尾)
+
+   Let RV.$U \sim \chi^2(r_1)$, RV.$V \sim \chi^2(r_2)$, then RV.$X=\frac{\frac{U}{r1}}{\frac{V}{r2}} \sim F(r_1,r_2)$.
+   $$
+   \begin{aligned}
+   &\left\{
+   	\begin{aligned}
+           & f(x)=
+           \left\{
+               \begin{aligned}
+               &\frac{\Gamma(\frac{r_1+r_2}{2}) \cdot (\frac{r_1}{r_2})^{\frac{r_1}{2}}}{\Gamma(\frac{r_1}{2})\Gamma(\frac{r_2}{2})} \cdot \frac{x^{\frac{r_1}{2}-1}}{(1+\frac{r_1}{r_2}x)^{\frac{r_1+r_2}{2}}} &, 0 < x < +\infin\\
+               &0 &, -\infin < x \leqslant 0
+               \end{aligned}
+           \right.\\\\
+   	& P\{X \leqslant x \} = \int_{0}^{x}f(t)\, {\rm d}t
+   	\end{aligned}
+   \right. \\\\
+   &\Rightarrow X \sim F(r_1,r_2)
+   \end{aligned}
+   
+   \tag{1.27}\label{1.27}
+   $$
+   where $r_1$ is the $df$ of numerator, $r_2$ is the $df$ of denominator.
+   
+   > *e.g.1*, F-distribution in different parameters
+   >
+   > <img src="./Figures/001/018.png" alt="018" style="zoom:80%;" />
+   >
+   > ```python
+   > plt.figure(figsize=(8, 6))
+   > 
+   > x = np.arange(0., 4., 0.01)
+   > 
+   > y = st.f.pdf(x, 3, 20)  # df = (3, 20)
+   > plt.annotate(
+   >     "n=3, m=20",
+   >     xy=(0.3, st.f.pdf(0.3, 3, 20)),
+   >     xytext=(0.3,st.f.pdf(0.3, 3, 20)+0.3),
+   >     weight="bold",
+   >     color='steelblue',
+   >     fontsize=14,
+   >     arrowprops=dict(arrowstyle="->",
+   >                     connectionstyle="arc3",
+   >                     color="steelblue")
+   > )
+   > ...
+   > plt.plot(x,y)
+   > ...
+   > plt.title("F分布概率密度函数", size=14)
+   > plt.xlabel("随机变量", size=14)
+   > plt.ylabel("F分布概率密度", size=14)
+   > plt.ylim(0., 1.1)
+   > plt.show()
+   > ```
+   
+   > *e.g.2*, Quantile filled graph of F-distribution
+   >
+   > <img src="./Figures/001/019.png" alt="019" style="zoom:80%;" />
+   >
+   > ```python
+   > plt.figure(figsize=(8, 6))
+   > 
+   > x = np.arange(0., 4., 0.001)
+   > y = st.f.pdf(x, 5, 8)  # df = (5, 8)
+   > 
+   > x1 = st.f.ppf(0.9, 5, 8)  # Lower quantile = 90%
+   > # axvline(): Draw the vertical line
+   > plt.axvline(
+   >     x=x1, 
+   >     ymax=st.f.pdf(x1, 5, 8)+0.01,  # +0.01 更美观一点
+   >     ls="--", 
+   >     c="red"
+   > )
+   > x2 = x[np.where(x > x1)]
+   > # fill_between(): Set fill color
+   > plt.fill_between(
+   >     x=x2,
+   >     y1=y[np.where(x > x1)],
+   >     y2=0,  # 不用管
+   >     facecolor="blue",
+   >     alpha=0.3  # Transparency 透明度
+   > )
+   > 
+   > plt.plot(x, y, label="alpha=0.1\n n=5 \n m=8")
+   > plt.title("F(5, 8)分布概率密度函数与分位点", size=14)
+   > plt.xlabel("随机变量", size=14)
+   > plt.ylabel("F分布概率密度", size=14)
+   > plt.ylim(0., 0.9)
+   > plt.legend(fontsize=14)
+   > plt.show()
+   > ```
 
 ### 1.3. Histogram, Experience Distribution and QQ Graph · 直方图，经验分布函数与 QQ 图
 
 #### 1.3.1. Histogram and Kernel Density Estimation · 直方图与核密度估计
 
+1. **Histogram**
 
+   
+
+2. **Kernel Density Estimation**
+
+   
 
 #### 1.3.2. Experience Distribution · 经验分布函数
 
@@ -666,7 +962,13 @@ st.f.rvs(size=, dfn=2, dfd=9)
 
 #### 1.3.3. QQ Graph and Stem-and-Leaf Display · QQ 图与茎叶图
 
+1. **QQ Graph**
 
+   
+
+2. **Stem-and-Leaf Display**
+
+   
 
 ### 1.4. Multivariate Data · 多元数据
 
